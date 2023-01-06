@@ -5,7 +5,7 @@ Welcome! This library provides the official implementation of our  paper: $\math
 
 ## Usage
 
-For multimodal groupwise registration, taking the BrainWeb data as an example, you could run `./core/trainers/Brainweb/BrainWebGroupRegTrainer.py` by the following code:
+For multimodal groupwise registration, taking the BrainWeb data (`./core/data/BrainWeb/test.zip`) as an example, you could run `./core/trainers/Brainweb/BrainWebGroupRegTrainer.py` by the following code:
 
 ```shell
 python -W ignore BrainWebGroupRegTrainer.py \
