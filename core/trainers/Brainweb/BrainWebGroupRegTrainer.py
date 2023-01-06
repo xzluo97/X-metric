@@ -150,7 +150,7 @@ class IterGroupRegTrainer(Trainer):
                                                 overlap_warping_indices, global_step=step)
                         self.writer.add_scalar('#NJD/%s' % indices[-1], num_neg_jacobs, global_step=step)
                         self.writer.add_scalars('PostRegDice/%s' % indices[-1], post_Dice, global_step=step)
-                        if model.model_type in ['ICMIUn', 'ICMIGT', 'GMM']:
+                        if model.model_type in ['XCoRegUn', 'XCoRegGT', 'GMM']:
                             self.writer.add_images('Posterior/%s' % indices[-1],
                                                    np.stack([utils.rgba2rgb(jet_cm(p)) for p in
                                                              self.reorder_posterior(
