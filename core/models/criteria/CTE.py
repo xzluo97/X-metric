@@ -8,7 +8,7 @@ __author__ = Xinzhe Luo
 import torch
 import torch.nn as nn
 import math
-import MI
+from MI import MI
 
 
 class CTE(nn.Module):
