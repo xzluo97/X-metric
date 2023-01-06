@@ -103,9 +103,9 @@ class BrainWebRegModel(nn.Module):
         self.reg.mask = mask
         self.reg.prior = prior
 
-        if self.model_type == 'ICMIUn':
+        if self.model_type == 'XCoRegUn':
             self.reg.init_app_params()
-        if self.model_type == 'ICMIGT':
+        if self.model_type == 'XCoRegGT':
             self.reg.init_app_params(labels=self.inv_warped_labels)
         if self.model_type == 'GMM':
             self.reg.init_gmm_params()
