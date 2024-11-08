@@ -28,24 +28,28 @@ class AffineGrid(nn.Module):
         return self.get_new_locs(self.grid, thetas)
 
     def get_new_locs(self, grid, thetas):
-        B = grid.shape[0]
         size = grid.shape[2:]
 
         if isinstance(thetas, torch.Tensor):
             assert thetas.shape[1] == self.dimension
             theta = thetas
+            B = theta.shape[0]
         elif isinstance(thetas, (tuple, list)):
             if len(thetas) > 0:
+                B = thetas[0].shape[0]
                 new_theta = self._augment_theta(thetas[0])
                 for theta in thetas[1:]:
                     if theta is not None:
                         new_theta = torch.matmul(self._augment_theta(theta), new_theta)
                 theta = new_theta[:, :self.dimension]
             else:
+                B = grid.shape[0]
                 return grid.clone()
         else:
             raise NotImplementedError
 
+        if grid.shape[0] != B and grid.shape[0] == 1:
+            grid = grid.repeat(B, 1, *([1] * self.dimension))
         mesh = grid.view(B, self.dimension, -1)
         mesh_aug = torch.cat([mesh, torch.ones(B, 1, mesh.size(2), dtype=mesh.dtype, device=mesh.device)],
                              dim=1)
